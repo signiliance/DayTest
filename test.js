@@ -245,3 +245,48 @@ xhr.onreadystatechange = function () {
     }
 }
 xhr.send(null);
+
+
+//
+window.addEventListener('load',function () {
+    //页面的全部资源加载完之后才会执行，包括图片，视频
+})
+
+document.addEventListener('DOMContentLoaded'.function(){
+    //DOM渲染完即可执行，此时图片，视频还可能没有加载完
+})
+
+var i ;
+for(i = 0;i<10;i++){
+    document.getElementsByTagName('p');
+}
+
+var plist = document.getElementsByTagName('p');
+for(var i = 0;i<plist.length;i++){
+    //
+}
+
+//合并dom插入
+var listnode = document.getElementById('list');
+var frag = document.createDocumentFragment('list');
+
+var x,li;
+for(x= 0;x<10;x++){
+    li = document.createElement('li');
+    li.innerHTML = "list item"+x;
+    frag.appendChild(li);
+listnode.append(frag);
+
+//事件节流
+var textarea = document.getElementById('text');
+var timeoutId;
+textarea.addEventListener('keyup',function () {
+    if(timeoutId){
+        claerTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(function () {
+        //触发change事件
+    },100)
+}
+})
+
