@@ -1,0 +1,357 @@
+
+元素居中。浮动的危害，清除浮动。伪类和伪元素是什么，变量类型 AMD,CMD 页面加载过程 性能优化，懒加载。前端安全。同源策略 跨域 ，http请求和回复信息，各种比较，
+
+
+
+get与post的区别：两个都是相对安全的请求方式，请求参数get 在请求参数跟在网址框内，get 没有请求体,请求参数是跟在URL地址后的,使用? 表示参数开始,.name= value.如果多个参数,中间使用&针对 请求来说，get 相对不安全,一般的请求都是get因为是默认的；
+
+? ? ? ?针对 访问来说，http 协议又get post. ?put . delate 等多种方法，而这些方法就是对应增删改查，对于数据来说，get 只是查询，不改什么内容，所以从这个角度get 相对更安全；
+
+##大小限制
+
+get 请求大小有限制 一般是不超过1kb ?post没有限制.
+
+如果上传涉及到上传，一般使用post 的方式上传，一般在浏览器中输入网址访问资源都是通过GET方式；在FORM提交中，可以通过Method指定提交方式为GET或者POST，默认为GET提交
+
+Http定义了与服务器交互的不同方法，最基本的方法有4种，分别是GET，POST，PUT，DELETE
+
+URL全称是资源描述符，我们可以这样认 为：一个URL地址，它用于描述一个网络上的资源，而HTTP中的GET，POST，PUT，DELETE就对应着对这个资源的查，改，增，删4个操作。到这里，大家应该有个大概的了解了，GET一般用于获取/查询资源信息，而POST一般用于更新资源信息(个人认为这是GET和POST的本质区别，也是协议设计者的本意，其它区别都是具体表现形式的差异)。
+GET提交，请求的数据会附在URL之后（就是把数据放置在请求行（request line）中），以?分割URL和传输数据，多个参数用&连接；.POST的安全性要比GET的安全性高。注意：这里所说的安全性和上面GET提到的“安全”不是同个概念。上面“安全”的含义仅仅是不作数据修改，而这 里安全的含义是真正的Security的含义，比如：通过GET提交数据，用户名和密码将明文出现在URL上，因为(1)登录页面有可能被浏览器缓存， (2)其他人查看浏览器的历史纪录，那么别人就可以拿到你的账号和密码了，除此之外，使用GET提交数据还可能会造成Cross-site request forgery，
+
+
+
+a标签的link、visited、hover、active是有一定顺序的
+a:link
+a:visited
+a:hover
+a:active
+
+行内元素的居中，例如想设置文本、图片等行内元素水平居中时，可以通过父元素设置 text-align:center 来实现，即给需要设置的元素添加一个父元素的容器，然后设置这个父元素（容器）的text-align属性即可。方法简单，原理也很容易理解，需要注意的是只能针对行内元素；
+
+2**、宽度一定的块状元素居中**。因为是块状元素，所以就没办法运用第一种方法的text-align属性了，这次我们是通过对需要设置的元素的“左右margin”值为“auto”来实现，margin的上下值可以根据需求随意设置，但是左右一定要为”auto”！需要注意的是，在设置 margin:20px auto 之前，一定要先设置width的值，即最后的设置样例为： 
+div { border:2px solid red; width:100px; margin:20px auto; } 
+即2个像素宽的红色实体边框，整个div元素的宽度为100像素，上下距离浏览器的空白边距为20像素，左右根据内容自动调整，这样就实现了块状元素的居中显示，别忘了，要先设置width：宽度值！宽度值！宽度值！这种方法优点是简单易懂，兼容性也强，但是扩展性比较差，无法自适应未知宽度的元素。
+
+3、宽度不确定块状元素的居中显示。这里大概也可以分为三个方法： 
+1）运用table标签；2）设置display:inline；3）设置position:relative和left:50%。
+
+
+
+浮动会脱离文档
+
+脱离文档，也就是说浮动不会影响普通元素的布局
+
+浮动可以内联排列
+
+浮动会向左/向右浮动，直到碰到另一个浮动元素为止，这是浮动可以内联排列的特征。也就是说，浮动可以设置宽高，并且能够一行多个，是介于block和inline之间的存在。
+浮动会导致父元素高度坍塌
+
+浮动会脱离文档流，这个问题对整个页面布局有很大的影响。
+一是利用 clear 属性，包括在浮动元素末尾添加一个带有 clear: both 属性的空 div 来闭合元素，其实利用 :after 伪元素的方法也是在元素末尾添加一个内容为一个点并带有 clear: both 属性的元素实现的。
+
+二是触发浮动元素父元素的 BFC (Block Formatting Contexts, 块级格式化上下文)，使到该父元素可以包含浮动元素
+
+
+display:inline的元素，padding-top/padding-bottom, margin-top/margin-bottom, width/height无效。
+
+伪类和伪元素是什么？
+
+伪类：用于向某些选择器加特殊的效果。（:active, :focus, :hover, :link, :visited, :first-child, :lang）
+伪元素：用于将特殊的效果添加到选择器。（::first-letter, ::first-line, ::before, ::after）
+伪类的效果可以通过添加一个实际的类来达到，而伪元素的效果则需要通过添加一个实际的元素才能达到，这也是为什么他们一个称为伪类，一个称为伪元素的原因。
+
+
+
+
+
+JS变量类型： 字符串、数字、布尔、数组、对象、Null、Undefined
+typeof得到的值：undefined string number boolean object function
+强制类型转换：字符串拼接（数字加字符串会变成字符串） ==运算符 （100 == ‘100’结果是true） if语句 if语句会把括号里的变量转换，会强制转换为布尔类型 ，逻辑运算符 10&&0 会把10转换为true 0转换为false 
+JS内置函数 Object Array Boolean Number String Function Date RegExp Error…… 内置对象：JSON Math……
+如何理解JSON： JSON是一个JS对象而已，是一种数据格式，
+
+构造函数： function Foo(name,age){
+this.name = name; this.age = age; this.class = class-1;
+//return this; 默认有这一行
+}
+var f = new Foo('张三',22);var f1 = new Foo('lisi',22);//创建多个对象
+
+使用instanceof判断一个函数是否是一个变量的构造函数 例如
+
+instanceof Array来判断某个变量是否为数组
+所有的引用类型（数组。对象，函数）都具有对象特性，即可自由扩展属性（除了null），所有的引用类型（数组，对象，函数），都有一个 __proto__属性，属性值是一个普通的值。
+所有的函数都有一个prototype属性。属性值也是一个普通的对象
+当试图得到一个对象的某个属性时，如果这个对象本身没有这个属性，那么回去他的__proto__（即他的构造函数的prototype）中寻找
+
+变量提升：变量定义，函数声明（不是函数表达式）
+
+this的使用场景：作为构造函数执行。作为对象属性执行，作为普通函数执行， call，apply，bind
+如何理解作用于：自由变量，作用域链（即自由变量的查找），闭包的两个场景
+闭包的实际应用中主要用于封装变量，收敛权限
+
+同步跟异步的区别：什么是异步（对比同步） ：什么情况下需要等待，什么情况下需要异步 （定时任务setTimeout，setInverval） 网络请求：ajax请求，动态<img>加载 ，事件绑定
+
+日期对象：
+Date.now() 当前毫秒数 var dt = new Date(); dt.getFullYear() 年 dt.getTime();获取毫秒数 dt.getMonth()+1; dt.getDate();获取当前日期 日 （0-31） dt.getHours();dt.getMinutes();dt.getSeconds();
+Math对象：
+Math.random();获取随机数 从0-1 随机小数
+
+数组API：forEach 遍历数组的所有元素  
+
+DOM结构操作：
+新增节点，获取父元素，获取子元素，删除节点
+
+Attribute 和 property的区别;
+property只是一个JS对象的属性的修改，Attribute是对html标签属性的修改
+
+BOM（浏览器对象模型）操作
+如何检测浏览器的类型：
+拆解URL的各部分
+
+Ajax跨域：
+什么是跨域： 浏览器有同源策略，不允许ajax访问其他域接口 跨域条件：协议，域名，端口（http默认端口80，https默认443），有一个不同就算跨域
+有三个标签允许跨域加载资源 <img src = xxx> <img>用于打点统计，统计网站可能是其他域  <link><script>可以使用CDN,CDN的也是其他域,<script>可以用于JSONP 
+所有的跨域请求，都必须经过信息提供方允许
+如果未经允许即可获取，那么浏览器就出现了同源策略的问题
+JSONP实现原理 加载http：//coding.mooc.com/clss.html 不一定服务器端就有一个clss。html文件，服务器可以根据请求，动态生成一个文件，返回，同理，<script src = "http://docing.ommc.com/app/js"> 也是一样
+
+加入你的网站要跨域访问一个慕课网的接口，给一个地址，返回内容格式如 callback（{x：100,y:200}）；
+
+jsonp实现原理：
+很简单，就是利用<script>标签没有跨域限制的“漏洞”（历史遗迹啊）来达到与第三方通讯的目的。当需要通讯时，本站脚本创建一个<script>元素，地址指向第三方的API网址，形如：     <script src="http://www.example.net/api?param1=1&param2=2"></script>     并提供一个回调函数来接收数据（函数名可约定，或通过地址参数传递）。     第三方产生的响应为json数据的包装（故称之为jsonp，即json padding），形如：     callback({"name":"hax","gender":"Male"})     这样浏览器会调用callback函数，并传递解析后json对象作为参数。本站脚本可在callback函数里处理所传入的数据。
+
+服务器端设置 http header
+
+cookie：本身用于客户端和服务器通信  但是她有本地存储的功能，于是就被借用
+cookie用于存储的缺点：存储量太小，只有4kb  所有http请求都带着，会影响获取资源的效率，API简单，需要封装才能用 document.cookie…
+
+localStorage sessionStorage 
+HTML5专门为存储设计，最大容量5mb，API简单易用 
+localStorage.setItem(key,value);localStorage.getItem(key)
+
+sessionStorag在关闭浏览器之后会清理，而localStorage不会  api一样，getItem和setItem 现在用的大多是localStorage
+
+坑：safari隐藏模式下，localStorage.getItem会报错，建议用的时候用try-catch包起来
+
+cookie会每次都带到ajax请求中，而后两者不会
+ AMD和CMD的区别：最明显的区别就是在模块定义时对依赖的处理不同
+
+1、AMD推崇依赖前置，在定义模块的时候就要声明其依赖的模块 
+2、CMD推崇就近依赖，只有在用到某个模块的时候再去require 
+这种区别各有优劣，只是语法上的差距，而且requireJS和SeaJS都支持对方的写法
+
+AMD和CMD最大的区别是对依赖模块的执行时机处理不同，注意不是加载的时机或者方式不同
+
+很多人说requireJS是异步加载模块，SeaJS是同步加载模块，这么理解实际上是不准确的，其实加载模块都是异步的，只不过AMD依赖前置，js可以方便知道依赖模块是谁，立即加载，而CMD就近依赖，需要使用把模块变为字符串解析一遍才知道依赖了那些模块，这也是很多人诟病CMD的一点，牺牲性能来带来开发的便利性，实际上解析模块用的时间短到可以忽略
+
+为什么我们说两个的区别是依赖模块执行时机不同，为什么很多人认为ADM是异步的，CMD是同步的（除了名字的原因。。。）
+
+同样都是异步加载模块，AMD在加载模块完成后就会执行改模块，所有模块都加载执行完后会进入require的回调函数，执行主逻辑，这样的效果就是依赖模块的执行顺序和书写顺序不一定一致，看网络速度，哪个先下载下来，哪个先执行，但是主逻辑一定在所有依赖加载完成后才执行
+
+CMD加载完某个依赖模块后并不执行，只是下载而已，在所有依赖模块加载完成后进入主逻辑，遇到require语句的时候才执行对应的模块，这样模块的执行顺序和书写顺序是完全一致的
+
+这也是很多人说AMD用户体验好，因为没有延迟，依赖模块提前执行了，CMD性能好，因为只有用户需要的时候才执行的原因
+
+
+页面加载过程：
+
+加载资源的形式：输入url（或跳转页面）加载html；加载html中的静态资源(包括js，css，视频，图片等)
+加载一个资源的过程是什么：浏览器根据DNS服务器得到域名的IP地址；向这个IP的机器发送http请求；服务器收到，处理并返回http请求；浏览器得到返回内容
+浏览器渲染界面的过程：根据html结构生成DOM Tree；根据CSS生成CSSOM；将DOM和CSSOM整合成RenderTree（渲染树，结构上和dom树一样）
+；根据RenderTree开始渲染和展示；遇到<script>时。会执行并阻塞渲染（因为js有权利改变DOM结构，所以要等到js执行完，不会干扰dom树，再去渲染）；
+
+window.addEventListener('load',function () {
+    //页面的全部资源加载完之后才会执行，包括图片，视频
+})
+
+document.addEventListener('DOMContentLoaded'.function(){
+    //DOM渲染完即可执行，此时图片，视频还可能没有加载完
+})
+
+性能优化：
+多使用内存，缓存或者其他方法；减少CPU运算， 较少网络
+从哪入手：加载页面和静态资源；页面渲染
+
+加载资源优化：静态资源的压缩合并；静态资源缓存；使用CDN让资源加载更快；使用SSR后端渲染，数据直接输出到html中
+渲染优化：CSS放前面，JS放后面；懒加载（图片懒加载，下拉加载更多）；减少DOM查询，对DOM查询做缓存；减少DOM操作，多个操作尽量合并在一起执行；事件节流；尽早执行操作（如DOMContentLoaded）
+浏览器缓存：通过控制名称控制缓存，即不改变服务器端的文件名，根据在之前加载过程中保留的缓存来减少资源请求
+SSR后端渲染： vue react提出了这样的概念，jsp php asp都属于后端渲染
+
+尽量减少HTTP请求次数
+2、减少DNS查找次数
+3、避免跳转
+4、可缓存的AJAX
+5、推迟加载内容
+6、预加载
+7、减少DOM元素数量
+8、根据域名划分页面内容
+9、使iframe的数量最小
+10、不要出现404错误
+11、使用内容分发网络
+12、为文件头指定Expires或Cache-Control 13、Gzip压缩文件内容
+14、配置ETag
+15、尽早刷新输出缓冲
+16、使用GET来完成AJAX请求
+17、把样式表置于顶部
+18、避免使用CSS表达式（Expression）
+19、使用外部JavaScript和CSS
+20、削减JavaScript和CSS
+21、用<link>代替@import
+22、避免使用滤镜
+23、把脚本置于页面底部
+24、剔除重复脚本
+
+懒加载：<img id = "img1" src = "preview.png" data-realstc = "abc.png">
+    <script type  = text/javascript>
+var img1 = document.getElementById('img1');
+img1.src = img1.getAttribute('data-realsrc')
+    </script>     preveiew.png是一个很小的图片，图片真正用的时候，abc.png是真正的连接，然后在请求
+
+合并DOM插入，减少DOM操作次数：
+var listnode = document.getElementById('list');
+var frag = document.createDocumentFragment('list');
+
+var x,li;
+for(x= 0;x<10;x++){
+    li = document.createElement('li');
+    li.innerHTML = "list item"+x;
+    frag.appendChild(li);
+listnode.append(frag);
+
+xss跨站请求攻击：（新浪写一篇文章，同时偷偷插入一段<script>，攻击代码中，获取cookie，发送到自己的服务器，发布博客，有人查看博客攻击；会把查看者的cookie发送到攻击者的服务器）
+解决：  前端替换关键字 替换< 为&lt;(比较费时)，建议后端替换
+
+XSRF跨站资源伪造：
+你已经登陆一个购物网站，正在浏览商品，该网站付费接口是 xx.com/pay?id=100 但是没有任何验证，然后你收到一封邮件，隐藏着<img src = xxx.com/pay?id=100>你查看邮件的时候，就已经悄悄的付费购买了
+解决方案：增加验证流程，如输入指纹，密码，短信验证码
+
+
+
+
+
+
+面试技巧：简历中：简历明了，重点突出项目经历和解决方案，把个人博客放在简历中，并且定期维护更新博客，把个人开源项目放在简历中，并维护开源项目，简历千万不能造假，要保持能力和经历上的真实性。
+
+如何看待加班？加班就像借钱，救急不救穷
+不要挑战面试官，不要反考面试官
+学会给面试官惊喜，但不要太多
+遇到不会回答的问题，说出你知道的也可以
+谈谈你的缺点--说一下你最近学的东西
+
+ 1.对前端行业充满热情，有活到老学到老的心态；
+2.做事认真踏实，工作时能灵活处理突发事件；
+3.有良好的团队合作意识与责任意识；
+3.与人和善，能正确处理与同事朋友的关系。
+
+
+一个域名地址的组成：
+
+http://   协议
+www   子域名
+abc.com 主域名
+:80  端口号（80默认省略）
+/sss  请求资源地址
+
+当协议，子域名，主域名，端口号中任意一个不相同时，都算作不同域
+
+同源策略指的是什么？
+
+同源指的是以下三个都相同：
+协议相同
+域名相同
+端口相同
+所谓同源策略指的是：浏览器对不同源的脚本或者文本的访问方式进行的限制。比如源a的js不能操作引入的源b的元素属性。
+限制主要为：
+Cookie、LocalStorage 和 IndexDB 无法读取。
+DOM无法获取
+AJAX请求不能发送
+
+跨域请求：1；代理，用户要访问另一个域名服务器的某一个服务，在本域名的服务器的服务内增加一个代理，来指向另一个服务器的服务，然后将结果返回给前端
+
+2.jsonp，可以用来解决主流浏览器的get请求的跨域请求，不能支持POST请求，利用<script>的可以跨域请求的特性（在jq中，将ajax请求，的type改成GET，data改成callback或者jsonp）
+
+3.H5提供的XMLHttpRquest Level2已经实现了跨域请求，在服务器端做一个小小的改造就行，
+header("Access-Control-Allow-Origin:*");header("Access-Control-Allow-Methods:POST,GET");CORS方法有如下优点：
+
+简单，几乎不需要什么开发量，只需要简单配置相应的请求与响应头信息即可。
+支持各种类型的请求（get, post, put等等）。
+但缺点是：
+
+需要对跨域的服务接口进行一定的改造。如果该服务因为某些原因无法改造，则无法实现。但这种改造还是相对较小的。
+不兼容一些“古董”浏览器。
+
+4.ocument.domain(适用于子域跨域)
+在同源策略中有一个例外，脚本可以设置 document.domain
+的值为当前域的一个后缀，如果这样做的话，短的域将作为后续同源检测的依据。例如，假设在 http://t1.kangbiao.org/index 中的一个js脚本执行了下列语句：
+document.domain = "kanbgiao.org";
+这条语句执行之后，页面将会成功地通过对 http://company.com/index
+的同源检测。但是不能通过设置 document.domain = "notkangbiao.org";完成对其他域的访问，该方法只适用于子域和父域之间的跨域解决。
+
+
+
+5.通过HTML5的postMessage方法跨域
+
+高级浏览器Internet Explorer 8+, chrome，Firefox , Opera 和 Safari 都将支持这个功能。这个功能主要包括接受信息的"message"事件和发送消息的"postMessage"方法。postMessage可以实现窗口和窗口，页面和iframe，页面和窗口间的跨域通信
+postMessage需要源网站和跨域网站同时实现两个接口postMessage(发送数据)和addEventListener(监听事件，接受数据)
+
+
+Http Request
+
+Http Request包括三部分：请求行，请求头和请求体。
+
+第一行是请求行，格式是：方法+路径+Http版本，以空格分隔。从第二行开始是请求头，由若干个键值对构成，每个键值对一行。请求头结束后空一行，接着是请求体。
+
+POST请求的参数放在请求体里，GET请求没有请求体，请求的参数以键值对的形式存放在path里面。请求头里的键值对包括预定义键值对和自定义键值对，键值对内容包括请求的Host，User-agent，编码方式，请求体的类型，请求体的长度，分隔符等等信息，大部分都是可选的，我们也可以随意添加自定义的键值对来满足某些需求。
+
+Http Response也包括三部分：响应状态行，响应头和响应体。
+
+第一行是响应状态行包括Http版本+响应状态，以空格分隔。从第二行开始是响应头，包含若干个键值对，每个键值对占一行。后面空一行，接着是响应体。请求体可以包括多个part，通过header里面的分隔符分隔，比如音频上传时利用请求体里两个part分布存储文件类型和音频数据。
+User-agent键值对
+
+Http Request Header里有个user-agent字段，是用来存放发起请求的客户端或者浏览器的标识信息的，比如浏览器的名称版本，操作系统的名称版本，客户端的名称版本等。
+Cookie键值对存储的是一些标志用户身份或设置的信息，如session ID，language等。用户通过浏览器首次访问某个网站的时候，服务器生成一个cookie，并把它放在http响应的header里面，下次再次访问该网站的时候，浏览器会在http请求的header里面带上这个cookie值，服务器可以建立一个cookie值到用户表的映射，然后就可以利用这个识别用户。
+
+
+重点：
+
+Number与String比较，String转Number。
+Number与Object比较，Object转String。
+当比较中出现Boolean，无论另一个数据是什么类型，都先把Boolean转为Number。
+undefined与null，undefined与undefined，
+null与null都返回true。
+Object 与 Object只有引用相同返回true。
+数据类型转化为Boolean的规则：
+
+String的 “” 转换为Boolean为false其他都为true
+Number的0和NaN转换为Boolean为false其他都为true
+Object的null转换为Boolean为false其他都为true
+Undefined转换为false 不能转换为true
+
+
+
+[] == ![] //true
+
+// 1.由于!的优先级比较高，先执行![]，[]是空数组，数组是对象，由2.3(需要了解的知识文字序号)，则[]转换为boolean结果为true，![]结果就为false，表达式变为判断 []==false
+// 2.根据1.3，将false转为Number,结果为0，表达式变为判断 [] == 0
+// 3.根据1.2，将[]变为String，结果为""，表达式变为判断 "" == 0
+// 4.根据1.1，将""变为Number，结果为0，表达式变为判断 0 == 0
+返回结果 true
+
+console.log(1 == true); // 文字1.3，Number(true) = 1  ->  1 == 1 true
+console.log(2 == true); // 文字1.3，Number(true) = 2  ->  2 == 1 false
+console.log(0 == false);//文字 1.3，Number(false)= 0  ->  0 == 0 true
+console.log(NaN == NaN);// 图片1.c.i/1.c.ii false
+console.log({} == {});// 图片1.f {}是对象，比较引用指向的空间，因为是两个不同的空对象，地址也不一样 false
+console.log([] == []);// 同理
+console.log(null == 0);// 文字1.2 null是对象，String(null) == "null"  -> "null" == 0 ，文字1.1 Number("null") == NaN -> NaN == 0 false
+console.log(undefined == 0);// 这里将执行String(undefined)，之后执行步骤同上
+
+总结：
+undefined == null，结果是true。且它俩与所有其他值比较的结果都是false。
+
+String == Boolean，需要两个操作数同时转为Number。
+
+String/Boolean == Number，需要String/Boolean转为Number。
+
+Object == Primitive，需要Object转为Primitive(具体通过valueOf和toString方法)。
+

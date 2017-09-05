@@ -1,0 +1,210 @@
+SVG使用XML描述2D图形。canvas使用js描绘2D图形。SVG基于XML意味着SVG DOM中每个元素都是可以用的。可以为某个元素添加事件处理。在SVG中，每个绘制的图形都是对象。如果SVG对象的属性发生变化，那么浏览器能够自动重现图形，而canvas是逐像素进行渲染的。在canva中一旦被绘制完成，他就不会继续得到浏览器关注，如果其位置发生变化，那么整个场景也需要重新绘制，包括任何或许已经被图形覆盖的对象。？？？svg可以元素级别重绘，canvas中任何一个对象发生改变所有场景重画？？
+
+canvas依赖分辨率，不支持事件处理，弱文本渲染，能以png、jpg保存图像结果最适合图像密集型的游戏，其中许多对象会被频繁重绘？？这样不会慢吗？？
+
+svg不依赖分辨率，支持时间处理，适合带有大型渲染区域的应用程序，如谷歌地图，复杂度高会减慢渲染速度，任何使用dom的应用都不快，不适合游戏？？
+
+canvas使用
+
+通过脚本完成？？除了js外？<canvas>本身只是图形容器，是一个矩形，没有边框和内容？？默认有长宽吗？一个页面可以使用多个canvas。
+
+<canvas id="my" width="200" height="100"
+
+style="border:1px solid #000000;"> </canvas>没有单位？？
+
+var c=document.getElementById("my");
+
+var ctx = c.getContext("2d")//返回内建的HTML5对象
+
+ctx.fillStyle="#FF0000";//可以是颜色 渐变 图案等
+
+ctx.fillReact(0,0,10,75); //起点0,0 长宽150,75
+
+矩形
+
+fillReact(x, y, width,height)
+
+strokeReact(x, y, width,height)
+
+clearReact(x, y, width,height) 清楚一部分并设为透明（其实就是清除？）
+
+路径：
+
+var c= document.getElementById("my");
+
+var ctx = c.getContext("2d");
+
+ctx.moveTo(0,0);
+
+ctx.lineTo(200,100);
+
+ctx.stroke();
+
+beginPath() 返回存储路径的信息（具体是什么）
+
+closePath（）从当前的点到起始点闭合路径 似乎不是必需的？
+
+stroke（）描边路径
+
+fill（）填充路径?
+
+lineTo(x, y)从上一个起点到（x,y）的点划线，上一个起点可以通过moveTo来时指定，默认为原线路经的终点
+
+画圆
+
+arc(x,y， radius,startAngle, stopAngle， anticlockwise) true为逆时针否则顺时针
+
+二次曲线quadraticCurveTo（cp1x, cp1y, x, y）
+
+贝塞尔曲线bexierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y)
+
+(cp1x, cp1y), (cp2x, cp2y)是曲线控制点，x\y是终点
+
+使用了ink的方法，比如stroke fill？？？
+
+var c = document.getElementById("my");
+
+var ctx = c.getContext("2d");
+
+ctx.beginPath();
+
+ctx.arc(95, 50, 40, 0, 2*Math.PI);//圆心位置 x, y（向右向下为正），半径第四个参数？？，第五个是画的弧度？
+
+ctx.stroke();
+
+文本
+
+1. var c = document.getElementById("my"),
+
+var ctx = c.getContext("2d");
+
+ctx.font="30px Arial";
+
+ctx.fillText("Hello World", 10, 50);//一个canvas只能有一种字体？ 一个位置写字？
+
+2. var c = document.getElementById("my");
+
+var ctx = c.getContext("2d");
+
+ctx.font="30px Arial";
+
+ctx.strokeText("Hello World", 10, 50);//param??
+
+渐变
+
+createLineGradient(x,y,x1,y1) 渐变线条
+
+createRadialGradient（x,y,r,x1,y1） 创建一个径向、圆渐变
+
+当我们使用渐变对象，必须使用两种或两种以上的停止颜色， addColorStop指定颜色停止，参数使用坐标来描述，可以是0到1
+
+使用渐变，设置fillStyle或者strokeStyle的值为渐变，然后绘制形状，如矩形、文本、或者一条线。使用createLineGradient。
+
+1. var grd=c.createLineGradient(0,0,100,90);
+
+grd.addColorStop(0, "red");
+
+grd.addColorStop(1, "white");
+
+ctx.fillStyle = ?grid;
+
+ctx.fillRect(10,.10.150.80);
+
+
+
+2.var grd = ctx.createRadialGradient(75,50,5,90,60,100);
+
+grd.addColorStop(0,"red");
+
+grd.addColorStop(1,"white");
+
+ctx.fillStyle=grd;
+
+ctx.fillRect(10, 10, 150, 80);
+
+图像
+
+var img=document.getElementById("screen");
+
+img.onload = function(){
+
+? ctx.drawImage(img, 10,10) //起点位置 ?img 是指一定要用这种方式吗
+
+}
+
+img==> var img = new Image();
+
+img.onload = function(){
+
+....
+
+}
+
+img.src="images/backdrop.png";
+
+其他
+
+fillStyle 填充色
+
+stroleStyle ?描边色
+
+lineWidth ?线条宽度
+
+lineCap 线条端点 butt（默认） round square（同butt也是平的 但是会伸出来）
+
+lineJoin 折角类型 miter（默认 有角） bevel（截掉角上三角形） round（圆角）
+
+miterLimit ？？？
+
+createPattern(img, type) ?type:repeat, repeat-x，repeat-y，no-repeat
+
+save（）
+
+restore（）
+
+变化
+
+translate（x， y） 移动canvas坐标？？
+
+rotate（angle） 旋转中心是canvas的坐标原点（顺势针），translate可以移动canvas坐标
+
+scale（x，y）
+
+transform（m11, m12, m21， m22，dx，dy）？？
+
+setTransform（m11, m12, m21， m22，dx，dy）？？
+
+globalCompositeOperation
+source是要添加的图形
+
+destination是已在的
+
+值有
+
+source-over， destination-over, source-in(保留新加图像的交错部分, 以新加的图像内容保留), destination-in(保留新加图像的交错部分, 以已有的图像内容保留), source-out(新加图像内容未交错部分), destination-out,(已有图像内容未交错部分)，darker（全部保留，交错部分重叠色），lighter（全部保留，交错部分反色？）,xor(相交部分挖空)，copy（只有新加部分），source-atop(已有图像 交错部分显示新加图像)，destination-atop（新加图像，交错部分已有图像）
+
+
+
+
+
+阴影
+
+shadowOffsetX
+
+shadowOffsetY
+
+shadowBlur ，模糊度
+
+shadowColor
+
+
+
+SVG
+
+可伸缩矢量图，使用xml格式定义图形，图像在放大或者改变尺寸时质量不会有损失，万维网联盟标准。
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+
+? ? ? ?<polygon points="100,10,40,180,190,60,10,60,160,180" style="fill: lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+
+</svg>

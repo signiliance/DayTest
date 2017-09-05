@@ -1,0 +1,67 @@
+Number类型是与数字值对应的引用类型。
+
+var num = new Number(100);
+
+console.log(num.toString()); // "100"
+
+console.log(num.toLocaleString()); // "100"
+
+console.log(num.valueOf());  // 100(数字，不是字符串，和上边有区别)
+
+console.log(num.toFixed(3)); // 100.000
+
+console.log(num.toExponential(3)); // 1.000e+2 (指数显示)
+
+console.log(num.toPrecision(2)); // 1.0e+2 （根据需要显示的位数，自行判断是使用指数显示还是整数显示或者浮点数显示）  支持1到21位小数
+
+
+var svalue = "Hello World!";
+
+console.log(svalue.length); ? // 12
+
+console.log(svalue.charAt(4)); ?// o ?首位和数组一样，index从0开始
+
+console.log(svalue.charCodeAt(4)); //这里会显示字符编码
+
+console.log(svalue[3]); //这个方法支持IE8+ 及所有其他浏览器，显示结果和svalue.charAt(3)一样
+
+字符串的方法：
+
+concat()用于对一个或者多个字符串进行拼接显示，生成新的字符串，不会影响原有字符串。
+
+//字符串方法
+
+var svalue = "Hello";
+
+var result = svalue.concat("Da Wa");
+
+console.log(result);
+
+console.log(svalue);
+
+var b = svalue + 'Er Wa';
+
+相比于concat()方法，我们一般较多使用的是 “+”的方法进行字符串的拼接显示，也比较方便简单。
+
+还有三种创建新字符串的方法：slice()、substr()、substring()。以上三种方法都可输入1到2个参数。三种方法的第一个参数都是指字符串操作的起始位置，slice()、substring()的第二个参数指的是结束位置后一个位置的，substr()的第二个参数则指的是从第一个参数开始的位置起要返回的字符的个数。这里注明一下。同时在参数为负值时的表现效果和定义也不一致，需要注意！
+
+var a = "tianqingle";
+
+console.log(a.slice(3)); //“nqingle”
+
+console.log(a.substring(3)); //“nqingle”
+
+console.log(a.substr(3)); //“nqingle”
+
+console.log(a.slice(3, 7)); //"nqin"
+
+console.log(a.substring(3, 7)); //"nqin"
+
+console.log(a.substr(3, 7)); //“nqingle”
+console.log(h.replace("at", "ond"));  //  只会修改第一个与“at”相匹配的内容
+
+console.log(h.replace(/at/g, "end"));  //  使用正则，由于追加使用全局g，会将全部与“at”匹配的内容都更换掉
+
+
+
+
